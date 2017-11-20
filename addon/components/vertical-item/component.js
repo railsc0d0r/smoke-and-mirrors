@@ -76,7 +76,13 @@ export default Component.extend({
       if (this.setHeightProp) {
         this.element.style.height = `${this.satellite.geography.height}px`;
       }
-      this.element.style.minHeight = `${this.satellite.geography.height}px`;
+      let defaultHeight = this.get('defaultHeight');
+
+      if (typeof defaultHeight === 'number') {
+        defaultHeight = `${defaultHeight}px`;
+      }
+
+      this.element.style.minHeight = defaultHeight;
     }
 
     this._contentInserted = false;
@@ -124,7 +130,7 @@ export default Component.extend({
 
     let height = _height ? `${_height}px` : defaultHeight;
 
-    this.element.style.minHeight = height;
+    this.element.style.minHeight = defaultHeight;
 
     if (this.setHeightProp) {
       this.element.style.height = height;
